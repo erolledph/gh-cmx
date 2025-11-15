@@ -116,19 +116,43 @@ export default function CreatePostTab() {
           />
         </div>
 
-        <ImageUpload onImageUrl={setImageUrl} />
+        <div className="space-y-3 border-l-4 border-blue-500 p-4 bg-blue-50">
+          <p className="text-sm font-semibold text-gray-700">Image URL *</p>
+          <p className="text-xs text-gray-600">Choose one option: upload or paste URL</p>
+          
+          <ImageUpload onImageUrl={setImageUrl} />
 
-        {imageUrl && (
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-blue-50 text-gray-500">OR</span>
+            </div>
+          </div>
+
           <div>
-            <p className="text-xs text-gray-600 mb-1">Image URL:</p>
+            <label htmlFor="imageUrl" className="block text-sm font-semibold mb-2">
+              Paste Image URL Directly
+            </label>
             <input
-              type="text"
+              type="url"
+              id="imageUrl"
               value={imageUrl}
-              readOnly
-              className="w-full border p-2 rounded bg-gray-50"
+              onChange={(e) => setImageUrl(e.target.value)}
+              className="w-full border p-2 rounded"
+              placeholder="https://example.com/image.jpg"
+              required
             />
           </div>
-        )}
+
+          {imageUrl && (
+            <div className="mt-3 p-3 bg-white rounded border border-green-200">
+              <p className="text-xs text-gray-600 mb-2">Preview:</p>
+              <img src={imageUrl} alt="Preview" className="max-w-xs h-auto rounded border" onError={() => setMessage('Error loading image URL')} />
+            </div>
+          )}
+        </div>
 
         <div>
           <label htmlFor="author" className="block text-sm font-semibold mb-2">
