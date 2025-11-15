@@ -1,0 +1,10 @@
+name = "gh-cmx"
+type = "javascript"
+
+[build]
+command = "npm run build"
+
+[site]
+bucket = ".next"
+
+

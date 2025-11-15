@@ -1,55 +1,63 @@
 # Deployment Guide
 
-## Recommended: Deploy to Vercel (Best for Next.js)
+## Deploy to Cloudflare Pages
 
-Vercel is the official Next.js deployment platform and offers the best compatibility and performance.
+### Setup Instructions
 
-### Quick Deploy to Vercel
+1. **Connect Cloudflare to GitHub**
+   - Go to [dash.cloudflare.com](https://dash.cloudflare.com)
+   - Go to **Workers & Pages** → **Pages**
+   - Click **Connect to Git**
+   - Authorize GitHub and select `erolledph/gh-cmx`
 
-1. Go to [vercel.com](https://vercel.com)
-2. Click **"Create New Project"**
-3. Connect your GitHub repository (`erolledph/gh-cmx`)
-4. Vercel will auto-detect Next.js configuration
-5. Add Environment Variables (from **Settings → Environment Variables**):
-   ```
-   NEXT_PUBLIC_FIREBASE_API_KEY=your_value
-   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_value
-   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_value
-   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_value
-   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_value
-   NEXT_PUBLIC_FIREBASE_APP_ID=your_value
-   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_value
-   NEXT_PUBLIC_SITE_URL=your_vercel_domain
-   ```
-6. Click **"Deploy"**
+2. **Configure Build Settings**
+   - **Build command**: `npm run build`
+   - **Build output directory**: `.next`
+   - **Root directory**: (leave blank)
 
-That's it! Vercel will handle everything automatically.
+3. **Add Environment Variables**
+   - Go to **Settings** → **Environment variables** → **Production**
+   - Add all Firebase configuration:
+     ```
+     NEXT_PUBLIC_FIREBASE_API_KEY=your_value
+     NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_value
+     NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_value
+     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_value
+     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_value
+     NEXT_PUBLIC_FIREBASE_APP_ID=your_value
+     NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_value
+     NEXT_PUBLIC_SITE_URL=https://gh-cmx.pages.dev
+     ```
 
-### Benefits of Vercel
-- ✅ Perfect Next.js support (made by same team)
-- ✅ Automatic deployments on every push
-- ✅ Free tier includes serverless functions
-- ✅ Built-in analytics and performance monitoring
-- ✅ Custom domains (including .pages.dev)
-- ✅ Preview deployments for pull requests
+4. **Deploy**
+   - Click **Save and Deploy**
+   - Cloudflare will automatically deploy on every push to `main` branch
+
+### Monitoring
+
+- Check deployment status in **Deployments** tab
+- View logs in each deployment's **View details**
+- Custom domain: Go to **Custom domains** to add your own domain
+
+### Benefits
+- ✅ Free tier with generous limits
+- ✅ Global CDN for fast performance
+- ✅ Automatic HTTPS
+- ✅ Git integration with auto-deploy
+- ✅ Analytics and security features
+- ✅ Edge computing ready
 
 ---
 
-## Alternative: Cloudflare Pages (Requires Functions)
+## Troubleshooting
 
-If you want to stay with Cloudflare Pages, you'll need to use **Cloudflare Workers** as serverless functions to handle dynamic routes (API endpoints). This is more complex and requires:
+If you see 404 errors:
+1. Make sure **Build output** is set to `.next` (not `.next/static`)
+2. Ensure environment variables are set
+3. Check **Deployments** for build logs
 
-1. Creating `functions/` directory for server-side code
-2. Configuring `wrangler.toml` 
-3. Building for static export
+If build fails:
+1. Check error logs in deployment details
+2. Verify `npm run build` works locally with: `npm run build`
+3. Ensure all environment variables are configured
 
-We recommend **Vercel instead** for a much simpler setup.
-
----
-
-## Current Deployment Status
-
-- **Repository**: Ready to deploy ✅
-- **Build**: Working correctly ✅
-- **Environment**: Needs configuration
-- **Recommended Platform**: Vercel (Free tier available)
