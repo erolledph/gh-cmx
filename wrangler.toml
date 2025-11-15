@@ -7,8 +7,17 @@ nodejs_compat = true
 
 [build]
 command = "npm run build"
+cwd = "./"
+watch_paths = ["**/*.tsx", "**/*.ts", "**/*.jsx", "**/*.js", "lib/**", "app/**"]
 
 [site]
-bucket = ".next"
+bucket = ".next/static"
+# Serve .next as SPA fallback for client-side routing
+include_dir = ".next"
+
+[[routes]]
+pattern = "/*"
+zone_name = "gh-cmx.pages.dev"
+custom_domain = true
 
 
