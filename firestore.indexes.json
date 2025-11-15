@@ -1,0 +1,80 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "comments",
+      "queryScope": "Collection",
+      "fields": [
+        {
+          "fieldPath": "slug",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "comments",
+      "queryScope": "Collection",
+      "fields": [
+        {
+          "fieldPath": "parentId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "messages",
+      "queryScope": "Collection",
+      "fields": [
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "messages",
+      "queryScope": "Collection",
+      "fields": [
+        {
+          "fieldPath": "read",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subscribers",
+      "queryScope": "Collection",
+      "fields": [
+        {
+          "fieldPath": "unsubscribed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subscribedAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subscribers",
+      "queryScope": "Collection",
+      "fields": [
+        {
+          "fieldPath": "subscribedAt",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}
