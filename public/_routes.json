@@ -1,14 +1,14 @@
 {
   "version": 1,
   "include": ["/*"],
-  "exclude": ["/api/*", "/_next/*"],
+  "exclude": ["/_next/*", "/_static/*"],
   "rules": [
     {
       "type": "rewrite",
       "include": ["/*"],
-      "exclude": ["/api/*", "/_next/*"],
+      "exclude": ["/_next/*", "/_static/*", ".html", ".js", ".css", ".png", ".jpg", ".svg"],
       "paths": {
-        "/*": "/$1"
+        "/*": "/index.html"
       }
     }
   ]
