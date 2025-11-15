@@ -5,6 +5,135 @@ A modern, headless CMS built with **Next.js 13**, **Firebase**, and **GitHub**, 
 ## ✨ Features
 
 ### 📝 Blog Management
+- Blog posts stored in GitHub (markdown with YAML frontmatter)
+- Admin dashboard with markdown editor toolbar
+- Automatic slug generation from titles
+- SEO metadata support
+
+### 💬 Open Comments System
+- Real-time threaded comments (no approval needed)
+- Built on Firebase Firestore
+- Admin can delete inappropriate comments
+
+### 📧 Contact & Newsletter
+- Public contact form
+- Newsletter subscription system
+- Admin inbox for message management
+
+### 🖼️ Media Management
+- Firebase Storage image uploads
+- **Automatic image optimization**: compress, resize (1200px max), convert to WebP
+- Dual input options: upload OR paste URL
+- Direct URL auto-fills from uploads
+- 5MB file size limit
+
+### 👤 Admin Dashboard
+- Password-protected (session-based)
+- 6 management tabs:
+  - **Overview** - Real-time statistics
+  - **Content** - Browse all posts
+  - **Comments** - Manage comments
+  - **Messages** - Contact form inbox
+  - **Subscribers** - Newsletter list
+  - **Create** - New post creation
+
+### 🔒 Security
+- Firestore security rules
+- Firebase Storage validation
+- Session-based authentication
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 16+
+- npm/yarn
+- Firebase project
+- GitHub Personal Access Token
+
+### Installation
+
+```bash
+# Clone and setup
+git clone https://github.com/erolledph/gh-cmx.git
+cd gh-cmx
+npm install
+
+# Configure environment (see SETUP.md)
+cp .env.example .env.local
+# Edit .env.local with your credentials
+
+# Start dev server
+npm run dev
+```
+
+Visit `http://localhost:3000` - Dashboard at `/dashboard`
+
+## 📖 Documentation
+
+- **[SETUP.md](SETUP.md)** - Complete setup & deployment guide
+- **[firestore.rules](firestore.rules)** - Security rules
+- **[storage.rules](storage.rules)** - Storage configuration
+
+## 🏗️ Architecture
+
+### Frontend
+- Next.js 13 (App Router)
+- React 18
+- Tailwind CSS
+- TypeScript
+
+### Backend
+- Next.js API Routes
+- Firestore (database)
+- Firebase Storage (images)
+- GitHub API (blog posts)
+
+### Deployment
+- Vercel (recommended)
+- Firebase (Firestore, Storage)
+- GitHub (blog post storage)
+
+## 📝 Blog Post Format
+
+Posts stored as markdown in GitHub with YAML frontmatter:
+
+```markdown
+---
+title: My First Post
+slug: my-first-post
+tags: [javascript, nextjs]
+imageUrl: https://...
+description: Post summary
+keywords: seo, keywords
+author: Your Name
+createdAt: 2025-11-15T00:00:00Z
+---
+
+# Your content here
+```
+
+## 🔧 Environment Variables
+
+See `.env.example` and [SETUP.md](SETUP.md) for details.
+
+## 📦 Dependencies
+
+- `firebase` - Backend services
+- `image-resize-compress` - Image optimization
+- `tailwindcss` - Styling
+- `typescript` - Type safety
+
+## 🤝 Contributing
+
+Feel free to submit issues and PRs!
+
+## 📄 License
+
+MIT
+
+## ✨ Features
+
+### 📝 Blog Management
 - Blog posts stored in GitHub repository (as markdown)
 - Admin dashboard for creating/editing content
 - Markdown editor with toolbar (H1, H2, lists, links, alignment, images)
