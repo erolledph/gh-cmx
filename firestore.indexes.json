@@ -33,16 +33,6 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "messages",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
           "fieldPath": "read",
           "order": "ASCENDING"
         },
@@ -60,16 +50,6 @@
           "fieldPath": "unsubscribed",
           "order": "ASCENDING"
         },
-        {
-          "fieldPath": "subscribedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "subscribers",
-      "queryScope": "COLLECTION",
-      "fields": [
         {
           "fieldPath": "subscribedAt",
           "order": "DESCENDING"
