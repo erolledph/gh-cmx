@@ -1,5 +1,8 @@
 import { getAllPosts } from '@/lib/github';
 
+// Mark this as dynamic to prevent static generation during build
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   const posts = await getAllPosts();

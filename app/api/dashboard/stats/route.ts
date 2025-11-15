@@ -2,6 +2,9 @@ import { isAuthenticated } from '@/lib/auth';
 import { getDashboardStats } from '@/lib/firestore';
 import { getAllPosts } from '@/lib/github';
 
+// Mark this as dynamic to prevent static generation during build
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   const authenticated = await isAuthenticated();
   if (!authenticated) {
