@@ -18,11 +18,21 @@ import { Comment, ContactMessage, Subscriber, DashboardStats } from './types';
 
 export async function addComment(comment: Omit<Comment, 'id' | 'createdAt' | 'updatedAt'>) {
   try {
-    const docRef = await addDoc(collection(db, 'comments'), {
-      ...comment,
+    const data: any = {
+      slug: comment.slug,
+      author: comment.author,
+      email: comment.email,
+      content: comment.content,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
-    });
+    };
+    
+    // Only include parentId if it's defined
+    if (comment.parentId) {
+      data.parentId = comment.parentId;
+    }
+    
+    const docRef = await addDoc(collection(db, 'comments'), data);
     return docRef.id;
   } catch (error) {
     console.error('Error adding comment:', error);
