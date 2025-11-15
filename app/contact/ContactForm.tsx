@@ -45,7 +45,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow">
       {success && (
         <div className="mb-4 p-3 bg-green-100 text-green-800 rounded">
-          Message sent successfully! We'll get back to you soon.
+          Message sent successfully! Well get back to you soon.
         </div>
       )}
 
