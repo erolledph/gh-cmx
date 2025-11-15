@@ -12,7 +12,6 @@ interface ImageUploadProps {
 export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
-  const [preview, setPreview] = useState<string>('');
   const [success, setSuccess] = useState(false);
   const [processStatus, setProcessStatus] = useState('');
 
@@ -39,13 +38,6 @@ export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
     setProcessStatus('Creating preview...');
 
     try {
-      // Create preview
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setPreview(event.target?.result as string);
-      };
-      reader.readAsDataURL(file);
-
       // Compress, resize, and convert to WebP
       setProcessStatus('Compressing and converting to WebP...');
       console.log('Original file size:', file.size, 'bytes');
@@ -126,13 +118,6 @@ export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
       {error && (
         <div className="text-red-600 text-sm bg-red-50 p-2 rounded border border-red-200">
           {error}
-        </div>
-      )}
-
-      {preview && (
-        <div className="mt-2">
-          <p className="text-xs text-gray-600 mb-1">Preview:</p>
-          <img src={preview} alt="Preview" className="max-w-xs h-auto rounded border" />
         </div>
       )}
     </div>
