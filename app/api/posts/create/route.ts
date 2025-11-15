@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isAuthenticated } from '@/lib/auth';
 import { createPost } from '@/lib/github';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   const authenticated = await isAuthenticated();
 

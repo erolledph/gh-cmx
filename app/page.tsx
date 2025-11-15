@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/github';
 
-export const revalidate = 0;
+// Revalidate every 24 hours for static generation
+export const revalidate = 86400;
 
 export default async function Home() {
   const posts = await getAllPosts();

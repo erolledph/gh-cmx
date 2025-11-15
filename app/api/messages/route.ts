@@ -1,6 +1,8 @@
 import { isAuthenticated } from '@/lib/auth';
 import { getContactMessages, addContactMessage, markMessageAsRead, deleteContactMessage } from '@/lib/firestore';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   const authenticated = await isAuthenticated();
   if (!authenticated) {
