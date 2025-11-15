@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { storage } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { fromBlob, blobToURL } from 'image-resize-compress';
 
 interface ImageUploadProps {
   onImageUrl: (url: string) => void;
@@ -13,6 +14,7 @@ export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
   const [error, setError] = useState('');
   const [preview, setPreview] = useState<string>('');
   const [success, setSuccess] = useState(false);
+  const [processStatus, setProcessStatus] = useState('');
 
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -34,6 +36,7 @@ export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
     setError('');
     setSuccess(false);
     setUploading(true);
+    setProcessStatus('Creating preview...');
 
     try {
       // Create preview
@@ -43,14 +46,32 @@ export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
       };
       reader.readAsDataURL(file);
 
-      // Upload to Firebase Storage
+      // Compress, resize, and convert to WebP
+      setProcessStatus('Compressing and converting to WebP...');
+      console.log('Original file size:', file.size, 'bytes');
+      
+      const compressedBlob = await fromBlob(
+        file,
+        80, // quality: 80% for good quality/size balance
+        1200, // width: max 1200px (auto-scale if taller)
+        'auto', // height: auto-scale based on aspect ratio
+        'webp' // format: convert to WebP
+      );
+
+      console.log('Compressed file size:', compressedBlob.size, 'bytes');
+      const compressionRatio = ((1 - compressedBlob.size / file.size) * 100).toFixed(1);
+      console.log('Compression ratio:', compressionRatio + '%');
+
+      // Generate filename with .webp extension
+      setProcessStatus('Uploading to Firebase...');
       const timestamp = Date.now();
-      const filename = `${timestamp}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '')}`;
+      const originalName = file.name.replace(/\.[^/.]+$/, ''); // Remove original extension
+      const filename = `${timestamp}-${originalName.replace(/[^a-zA-Z0-9-_]/g, '')}.webp`;
       const storageRef = ref(storage, `images/admin/${filename}`);
 
       console.log('Starting upload to:', `images/admin/${filename}`);
       
-      await uploadBytes(storageRef, file);
+      await uploadBytes(storageRef, compressedBlob);
       const downloadURL = await getDownloadURL(storageRef);
 
       console.log('Upload successful. URL:', downloadURL);
@@ -58,6 +79,7 @@ export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
       onImageUrl(downloadURL);
       setSuccess(true);
       setError('');
+      setProcessStatus('');
       
       // Clear file input
       e.target.value = '';
@@ -73,6 +95,7 @@ export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
         setError(`Upload failed: ${errorMessage}`);
       }
       setSuccess(false);
+      setProcessStatus('');
     } finally {
       setUploading(false);
     }
@@ -90,9 +113,15 @@ export default function ImageUpload({ onImageUrl }: ImageUploadProps) {
             className="border p-2 rounded w-full"
           />
         </div>
-        {uploading && <span className="text-sm text-blue-600 font-semibold">⏳ Uploading...</span>}
-        {success && <span className="text-sm text-green-600 font-semibold">✓ Uploaded</span>}
+        {uploading && <span className="text-sm text-blue-600 font-semibold">⏳ Processing...</span>}
+        {success && <span className="text-sm text-green-600 font-semibold">✓ Done</span>}
       </div>
+
+      {processStatus && (
+        <div className="text-sm text-blue-600 bg-blue-50 p-2 rounded border border-blue-200">
+          {processStatus}
+        </div>
+      )}
 
       {error && (
         <div className="text-red-600 text-sm bg-red-50 p-2 rounded border border-red-200">
