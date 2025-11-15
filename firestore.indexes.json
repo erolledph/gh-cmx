@@ -2,7 +2,7 @@
   "indexes": [
     {
       "collectionGroup": "comments",
-      "queryScope": "Collection",
+      "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "slug",
@@ -16,7 +16,7 @@
     },
     {
       "collectionGroup": "comments",
-      "queryScope": "Collection",
+      "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "parentId",
@@ -30,7 +30,7 @@
     },
     {
       "collectionGroup": "messages",
-      "queryScope": "Collection",
+      "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "createdAt",
@@ -40,7 +40,7 @@
     },
     {
       "collectionGroup": "messages",
-      "queryScope": "Collection",
+      "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "read",
@@ -54,7 +54,7 @@
     },
     {
       "collectionGroup": "subscribers",
-      "queryScope": "Collection",
+      "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "unsubscribed",
@@ -68,7 +68,7 @@
     },
     {
       "collectionGroup": "subscribers",
-      "queryScope": "Collection",
+      "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "subscribedAt",
