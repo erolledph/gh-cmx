@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node clean-cache.js",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "cf-build": "npm run build && wrangler pages deploy .next/static --project-name gh-cmx"
+    "lint": "next lint"
   },
   "dependencies": {
     "@types/node": "20.6.2",
