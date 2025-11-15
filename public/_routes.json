@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": ["/api/*", "/_next/*"],
+  "rules": [
+    {
+      "type": "rewrite",
+      "include": ["/*"],
+      "exclude": ["/api/*", "/_next/*"],
+      "paths": {
+        "/*": "/$1"
+      }
+    }
+  ]
+}
