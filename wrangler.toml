@@ -1,13 +1,9 @@
 name = "gh-cmx"
-type = "javascript"
 compatibility_date = "2025-01-11"
 pages_build_output_dir = ".next"
-
-[compatibility_flags]
-nodejs_compat = true
+compatibility_flags = ["nodejs_compat"]
 
 [build]
 command = "npm run build"
-watch_paths = ["app/**", "lib/**", "public/**"]
 
 
