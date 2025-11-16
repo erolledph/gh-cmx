@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { isAuthenticated } from '@/lib/auth';
 import DashboardClient from './DashboardClient';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {

@@ -2,7 +2,7 @@ import { isAuthenticated } from '@/lib/auth';
 import { getDashboardStats } from '@/lib/firestore';
 import { getAllPosts } from '@/lib/github';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {

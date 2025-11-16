@@ -6,12 +6,8 @@ import CommentsSection from '@/app/components/comments/CommentsSection';
 import NewsletterSubscribe from '@/app/components/NewsletterSubscribe';
 import type { Metadata } from 'next';
 
-export const runtime = 'edge';
-
-export async function generateStaticParams() {
-  const slugs = await getAllSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
+export const runtime = 'nodejs';
+export const revalidate = 3600; // Revalidate every hour
 
 export async function generateMetadata({
   params,

@@ -1,7 +1,7 @@
 import { isAuthenticated } from '@/lib/auth';
 import { getCommentsBySlug, getAllComments, addComment, updateComment, deleteComment } from '@/lib/firestore';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function GET(request: Request) {
   const url = new URL(request.url);

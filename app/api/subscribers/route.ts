@@ -1,7 +1,7 @@
 import { isAuthenticated } from '@/lib/auth';
 import { getSubscribers, addSubscriber, unsubscribe, unsubscribeByEmail } from '@/lib/firestore';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function GET(request: Request) {
   const authenticated = await isAuthenticated();
