@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/github';
 
+export const runtime = 'edge';
 // Revalidate every 24 hours for static generation
 export const revalidate = 86400;
 

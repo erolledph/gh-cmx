@@ -4,6 +4,7 @@ import { setSession } from '@/lib/auth';
 import { db } from '@/lib/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 
+export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {

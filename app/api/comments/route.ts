@@ -1,6 +1,8 @@
 import { isAuthenticated } from '@/lib/auth';
 import { getCommentsBySlug, getAllComments, addComment, updateComment, deleteComment } from '@/lib/firestore';
 
+export const runtime = 'edge';
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const slug = url.searchParams.get('slug');
