@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
+<<<<<<< HEAD
     "target": "es5",
+=======
+    "target": "es2020",
+>>>>>>> 42e84fb510b195b84c78169287928f02de69cf65
     "lib": [
       "dom",
       "dom.iterable",

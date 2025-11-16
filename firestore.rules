@@ -1,0 +1,83 @@
+// Firestore Security Rules
+// Add these rules to your Firestore Database in the Firebase Console
+// Go to Firestore Database > Rules and replace with these rules
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read access to all comments (public)
+    match /comments/{commentId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if request.auth != null;
+    }
+
+    // Allow public read and create for messages, admin can update/delete
+    match /messages/{messageId} {
+      allow read, create: if true;
+      allow update, delete: if request.auth != null;
+    }
+
+    // Allow public create and read for subscribers
+    match /subscribers/{subscriberId} {
+      allow read, create, update, delete: if true;
+    }
+  }
+}
+
+/*
+FIRESTORE COLLECTIONS STRUCTURE:
+
+1. comments (Collection)
+   - Fields:
+     * slug (string) - Blog post slug
+     * author (string) - Comment author name
+     * email (string) - Comment author email
+     * content (string) - Comment text
+     * parentId (string, optional) - For threaded replies
+     * createdAt (timestamp)
+     * updatedAt (timestamp)
+   - Index: Create composite index on (slug, createdAt descending)
+   - NOTE: approved field removed - all comments visible immediately
+
+2. messages (Collection)
+   - Fields:
+     * name (string) - Sender name
+     * email (string) - Sender email
+     * subject (string) - Message subject
+     * message (string) - Message content
+     * read (boolean) - Read status
+     * createdAt (timestamp)
+   - Index: Create index on createdAt descending
+
+3. subscribers (Collection)
+   - Fields:
+     * email (string, unique) - Subscriber email
+     * subscribedAt (timestamp) - Subscription date
+     * unsubscribed (boolean) - Unsubscribe status
+   - Index: Create index on (unsubscribed, subscribedAt)
+
+STORAGE BUCKET STRUCTURE:
+
+images/
+├── {userId}/
+│   ├── image1.jpg
+│   ├── image2.png
+│   └── ...
+
+HOW TO CREATE FIRESTORE INDEXES:
+1. Go to Firebase Console > Firestore Database > Indexes
+2. Click "Create Index"
+3. Collection ID: Enter collection name
+4. Add fields as specified above
+5. Query scope: Collection
+6. Click "Create"
+
+HOW TO SET UP STORAGE RULES:
+1. Go to Firebase Console > Storage > Rules
+2. Replace the default rules with the rules above
+3. Publish the rules
+
+Alternatively, when you run queries that need indexes,
+Firebase will suggest creating them automatically.
+*/
