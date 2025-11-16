@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isAuthenticated } from '@/lib/auth';
 import { createPost } from '@/lib/github';
 
+import { db } from '@/lib/firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import { cookies } from 'next/headers';
+
 export const dynamic = 'force-dynamic';
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   const authenticated = await isAuthenticated();
 
   if (!authenticated) {
