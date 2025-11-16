@@ -1,51 +1,36 @@
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/github';
 
-// Enable static generation with 24-hour revalidation
-export const revalidate = 86400;
-
-export default async function Home() {
-  const posts = await getAllPosts();
-
+// Static home page for Cloudflare Pages
+export default function Home() {
   return (
-    <div>
-      <header>
-        <h1>Blog</h1>
-        <nav>
-          <Link href="/auth">Login</Link>
-        </nav>
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b shadow">
+        <div className="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center">
+          <h1 className="text-3xl font-bold">Blog</h1>
+          <nav>
+            <Link href="/auth" className="text-blue-600 hover:underline">
+              Login
+            </Link>
+          </nav>
+        </div>
       </header>
 
-      <main>
-        <h2>All Posts</h2>
-        {posts.length === 0 ? (
-          <p>No posts yet.</p>
-        ) : (
-          <ul>
-            {posts.map((post) => (
-              <li key={post.slug}>
-                <article>
-                  <h3>
-                    <Link href={`/${post.slug}`}>{post.title}</Link>
-                  </h3>
-                  {post.imageUrl && (
-                    <img src={post.imageUrl} alt={post.title} width="300" />
-                  )}
-                  <p>{post.description}</p>
-                  <div>
-                    <strong>Tags:</strong> {post.tags.join(', ')}
-                  </div>
-                  <div>
-                    <strong>Author:</strong> {post.author}
-                  </div>
-                  <div>
-                    <strong>Date:</strong> {new Date(post.createdAt).toLocaleDateString()}
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
-        )}
+      <main className="max-w-4xl mx-auto px-4 py-12">
+        <div className="bg-white p-8 rounded shadow">
+          <h2 className="text-2xl font-bold mb-4">Welcome to the Blog</h2>
+          <p className="text-gray-700 mb-6">
+            This is your blog powered by Next.js, Firebase, and Cloudflare Pages.
+          </p>
+          <p className="text-gray-700 mb-6">
+            Check out the blog posts below or navigate through the menu.
+          </p>
+          <Link
+            href="/blog"
+            className="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
+          >
+            View All Posts
+          </Link>
+        </div>
       </main>
     </div>
   );
