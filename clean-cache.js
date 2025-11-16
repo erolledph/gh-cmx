@@ -3,17 +3,26 @@
 const fs = require('fs');
 const path = require('path');
 
-// Remove .next/cache directory for Cloudflare Pages
+// Clean Next.js cache and build artifacts, but keep the final build output
 const cacheDir = path.join(__dirname, '.next', 'cache');
+const buildDir = path.join(__dirname, '.next', 'build');
 
 if (fs.existsSync(cacheDir)) {
   try {
     fs.rmSync(cacheDir, { recursive: true, force: true });
-    console.log('✓ Cache cleaned successfully for Cloudflare Pages');
+    console.log('✓ .next/cache folder cleaned successfully');
   } catch (error) {
-    console.error('Error cleaning cache:', error);
-    process.exit(1);
+    console.error('Error cleaning .next/cache:', error);
   }
-} else {
-  console.log('✓ No cache directory found');
 }
+
+if (fs.existsSync(buildDir)) {
+  try {
+    fs.rmSync(buildDir, { recursive: true, force: true });
+    console.log('✓ .next/build folder cleaned successfully');
+  } catch (error) {
+    console.error('Error cleaning .next/build:', error);
+  }
+}
+
+console.log('✓ Build ready for Cloudflare Pages');

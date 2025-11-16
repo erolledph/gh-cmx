@@ -1,5 +1,8 @@
 import { getAllPosts } from '@/lib/github';
 
+export const runtime = 'nodejs';
+export const revalidate = 86400;
+
 export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   const posts = await getAllPosts();
