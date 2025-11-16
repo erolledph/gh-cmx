@@ -1,6 +1,6 @@
 name = "gh-cmx"
 compatibility_date = "2025-01-11"
-pages_build_output_dir = ".next/static"
+pages_build_output_dir = ".next"
 
 
 
