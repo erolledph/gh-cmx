@@ -1,8 +1,0 @@
-.next/cache
-node_modules
-.git
-.env
-.env.local
-.vercel
-.firebaserc
-
