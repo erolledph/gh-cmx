@@ -1,6 +1,5 @@
 import { getAllPosts } from '@/lib/github';
 
-export const runtime = 'nodejs';
 export const revalidate = 86400;
 
 export async function GET() {
